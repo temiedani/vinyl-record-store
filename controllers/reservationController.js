@@ -27,3 +27,35 @@ exports.checkAvailability = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Confirm a reservation
+exports.confirmReservation = async (req, res) => {
+  try {
+    const reservation = await Reservation.findByPk(req.params.id);
+    if (reservation) {
+      reservation.Status = "Confirmed";
+      await reservation.save();
+      res.json(reservation);
+    } else {
+      res.status(404).json({ error: "Reservation not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Reject a reservation
+exports.rejectReservation = async (req, res) => {
+  try {
+    const reservation = await Reservation.findByPk(req.params.id);
+    if (reservation) {
+      reservation.Status = "Rejected";
+      await reservation.save();
+      res.json(reservation);
+    } else {
+      res.status(404).json({ error: "Reservation not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
