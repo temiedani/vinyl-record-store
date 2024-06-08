@@ -3,6 +3,7 @@ const { sequelize } = require("./models");
 const vinylRecordsRouter = require("./routes/vinylRecords");
 const usersRouter = require("./routes/users");
 const reservationsRouter = require("./routes/reservations");
+const tracksRouter = require("./routes/tracks");
 const path = require("path");
 
 const app = express();
@@ -22,6 +23,9 @@ app.use("/users", usersRouter);
 
 // Reservations routes
 app.use("/reservations", reservationsRouter);
+
+// Tracks routes
+app.use("/tracks", tracksRouter);
 
 // Sync database and start server
 sequelize
